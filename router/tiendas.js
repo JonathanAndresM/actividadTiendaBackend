@@ -3,7 +3,7 @@ import { allTiendas, rubroTienda, tiendaOpen24, tiendaTel } from "../controllers
 
 const router = Router()
 
-router.get("/all", allTiendas)
+router.get("/", allTiendas)
 router.get("/rubro/:rubro", rubroTienda)
 router.get("/open24/:open24", tiendaOpen24)
 router.get("/telefono/:telefono", tiendaTel)

@@ -1,7 +1,6 @@
-import { response } from "express";
 import Producto from "../../models/Producto.js";
 
-let allProd = async (req, res) => {
+/*let allProd = async (req, res) => {
     try {
         let all = await Producto.find()
         return res.status(200).json({
@@ -42,10 +41,10 @@ let prodTipo = async (req, res) => {
     }
 }
 
-let prodPrecio = async (req,res) => {
+let prodPrecio = async (req, res) => {
     try {
         let precioQuery = req.params.precio
-        let all = await Producto.find({precio:precioQuery})
+        let all = await Producto.find({ precio: precioQuery })
         return res.status(200).json({
             response: all
         })
@@ -54,6 +53,40 @@ let prodPrecio = async (req,res) => {
             response: error
         })
     }
+}*/
+
+
+
+const handleResponse = (res, data, status = 200) => {
+    return res.status(status).json({ response: data })
+}
+
+const findProd = async (query,res) =>{
+    try {
+        let all = await Producto.find(query)
+        return handleResponse({},res)
+    }catch (error) {
+        return handleResponse(res, error, 500)
+    }
+}
+
+let allProd = async (req,res) => {
+    return await findProd({},res)
+}
+
+let prodStock = async (req,res) => {
+    let stockQuery = req.params.stock
+    return await findProd({stock:stockQuery},res)
+}
+
+let prodTipo = async (req,res) => {
+    let tipoQuery = req.params.tipo
+    return await findProd({tipo:tipoQuery},res)
+}
+
+let prodPrecio = async (req,res) => {
+    let precioQuery = req.params.precio
+    return await findProd({precio:precioQuery},res)
 }
 
 export { allProd, prodStock, prodTipo, prodPrecio }

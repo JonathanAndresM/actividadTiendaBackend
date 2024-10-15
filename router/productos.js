@@ -3,7 +3,7 @@ import { allProd, prodPrecio, prodStock, prodTipo } from "../controllers/product
 
 const router = Router()
 
-router.get("/all", allProd)
+router.get("/", allProd)
 router.get("/stock/:stock", prodStock)
 router.get("/tipo/:tipo", prodTipo)
 router.get("/precio/:precio", prodPrecio)

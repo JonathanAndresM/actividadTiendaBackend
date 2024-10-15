@@ -3,7 +3,7 @@ import { allEmpleados, empleadosCargo, empleadosPorTurno, empleadosSalario } fro
 
 const router = Router()
 
-router.get("/all", allEmpleados)
+router.get("/", allEmpleados)
 router.get("/turno/:turno", empleadosPorTurno)
 router.get("/cargo/:cargo",empleadosCargo)
 router.get("/salario/:salario", empleadosSalario)

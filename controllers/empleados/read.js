@@ -1,4 +1,5 @@
 import Empleado from "../../models/Empleado.js";
+import findDocument from "../findRead.js";
 
 /*let allEmpleados = async (req, res) => {
     try {
@@ -57,36 +58,36 @@ let empleadosSalario = async (req, res) => {
 
 
 
-const handleResponse = (res, data, status = 200) => {
+/*const handleResponse = (res, data, status = 200) => {
     return res.status(status).json({ response: data })
-}
+}*/
 
-const findEmpleados = async (query, res) => {
+/*const findEmpleados = async (query, res) => {
     try {
         let all = await Empleado.find(query)
         return handleResponse(res, all)
     } catch (error) {
         return handleResponse(res, error, 500)
     }
-}
+}*/
 
 let allEmpleados = async (req, res) => {
-    return await findEmpleados({}, res)
+    return await findDocument(Empleado,{}, res)
 }
 
 let empleadosPorTurno = async (req,res) => {
     let turnoQuery = req.params.turno
-    return await findEmpleados({turno:turnoQuery},res)
+    return await findDocument(Empleado,{turno:turnoQuery},res)
 }
 
 let empleadosCargo = async (req,res) => {
     let cargoQuery = req.params.cargo
-    return await findEmpleados({cargo:cargoQuery}, res)
+    return await findDocument(Empleado,{cargo:cargoQuery}, res)
 }
 
 let empleadosSalario = async (req,res) => {
     let salarioQuery = req.params.salario
-    return await findEmpleados({salario:salarioQuery},res)
+    return await findDocument(Empleado,{salario:salarioQuery},res)
 }
 
 export { allEmpleados, empleadosPorTurno, empleadosCargo, empleadosSalario }

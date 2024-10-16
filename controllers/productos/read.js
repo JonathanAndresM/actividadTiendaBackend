@@ -1,4 +1,5 @@
 import Producto from "../../models/Producto.js";
+import findDocument from "../findRead.js";
 
 /*let allProd = async (req, res) => {
     try {
@@ -57,7 +58,7 @@ let prodPrecio = async (req, res) => {
 
 
 
-const handleResponse = (res, data, status = 200) => {
+/*const handleResponse = (res, data, status = 200) => {
     return res.status(status).json({ response: data })
 }
 
@@ -68,25 +69,25 @@ const findProd = async (query,res) =>{
     }catch (error) {
         return handleResponse(res, error, 500)
     }
-}
+}*/
 
 let allProd = async (req,res) => {
-    return await findProd({},res)
+    return await findDocument(Producto,{},res)
 }
 
 let prodStock = async (req,res) => {
     let stockQuery = req.params.stock
-    return await findProd({stock:stockQuery},res)
+    return await findDocument(Producto,{stock:stockQuery},res)
 }
 
 let prodTipo = async (req,res) => {
     let tipoQuery = req.params.tipo
-    return await findProd({tipo:tipoQuery},res)
+    return await findDocument(Producto,{tipo:tipoQuery},res)
 }
 
 let prodPrecio = async (req,res) => {
     let precioQuery = req.params.precio
-    return await findProd({precio:precioQuery},res)
+    return await findDocument(Producto,{precio:precioQuery},res)
 }
 
 export { allProd, prodStock, prodTipo, prodPrecio }

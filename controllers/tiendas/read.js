@@ -1,6 +1,7 @@
-/*import Tienda from "../../models/Tienda.js";
+import Tienda from "../../models/Tienda.js";
+import findDocument from "../findRead.js";
 
-let allTiendas = async (req, res) => {
+/*let allTiendas = async (req, res) => {
     try {
         let all = await Tienda.find()
         return res.status(200).json({
@@ -53,14 +54,11 @@ let tiendaTel = async (req,res) => {
             response: error
         })
     }
-}
-
-export { allTiendas, rubroTienda, tiendaOpen24, tiendaTel }*/
+}*/
 
 
-import Tienda from "../../models/Tienda.js";
 
-// Función auxiliar para manejar las respuestas
+/*// Función auxiliar para manejar las respuestas
 const handleResponse = (res, data, status = 200) => {
     return res.status(status).json({ response: data });
 };
@@ -73,29 +71,29 @@ const findTiendas = async (query, res) => {
     } catch (error) {
         return handleResponse(res, error, 500);
     }
-};
+};*/
 
 // Obtener todas las tiendas
 let allTiendas = async (req, res) => {
-    return await findTiendas({}, res);
+    return await findDocument(Tienda,{}, res);
 };
 
 // Obtener tiendas por rubro
 let rubroTienda = async (req, res) => {
     let rubroQuery = req.params.rubro;
-    return await findTiendas({ rubro: rubroQuery }, res);
+    return await findDocument(Tienda,{ rubro: rubroQuery }, res);
 };
 
 // Obtener tiendas abiertas 24 horas
 let tiendaOpen24 = async (req, res) => {
     let open24Query = req.params.open24;
-    return await findTiendas({ open24: open24Query }, res);
+    return await findDocument(Tienda,{ open24: open24Query }, res);
 };
 
 // Obtener tiendas por número de teléfono
 let tiendaTel = async (req, res) => {
     let telefonoQuery = req.params.telefono;
-    return await findTiendas({ telefono: telefonoQuery }, res);
+    return await findDocument(Tienda,{ telefono: telefonoQuery }, res);
 };
 
 export { allTiendas, rubroTienda, tiendaOpen24, tiendaTel };

@@ -1,11 +1,12 @@
 import Tienda from "../../models/Tienda.js";
-import handleResponse from "../handleResponse.js";
+import { creator, creatorMany } from "../creator.js";
+//import handleResponse from "../handleResponse.js";
 
 /*const handleResponse = (res, data, status = 201) => {
     return res.status(status).json({ response: data });
 };*/
 
-let create = async (req, res) => {
+/*let create = async (req, res) => {
     try {
         let tienda = req.body
         await Tienda.create(tienda)
@@ -23,6 +24,14 @@ let createMany = async (req, res) => {
     } catch (error) {
         return handleResponse(res, error, 500);
     }
+}*/
+
+const create = async (req, res) => {
+    return await creator(Tienda, req, res)
+}
+
+const createMany = async (req, res) => {
+    return await creatorMany(Tienda, req, res)
 }
 
 export { create, createMany }
